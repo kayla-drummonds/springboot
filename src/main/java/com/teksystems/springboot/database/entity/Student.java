@@ -9,8 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -32,30 +30,14 @@ public class Student {
     @Column(name = "id")
     private Integer id;
 
-    @Column(name = "firstname")
-    private String firstName;
+    @Column
+    private String email;
 
-    @Column(name = "lastname")
-    private String lastName;
+    @Column
+    private String name;
 
-    @Column(name = "street")
-    private String street;
-
-    @Column(name = "streetdetail")
-    private String streetDetail;
-
-    @Column(name = "city")
-    private String city;
-
-    @Column(name = "state")
-    private String state;
-
-    @Column(name = "postalcode")
-    private String postalCode;
-
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @JoinColumn(name = "department_id", nullable = false)
-    private Department department;
+    @Column
+    private String password;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudentCourse> studentCourses;
