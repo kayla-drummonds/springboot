@@ -20,18 +20,21 @@ public class IndexController {
     private CourseDAO courseDAO;
 
     @GetMapping({ "/", "/index", "/index.html" })
-    public ModelAndView slash(@RequestParam(required = false) String searchName,
-            @RequestParam(required = false) String searchInstructor) {
+    public ModelAndView slash(@RequestParam(required = false) String courseName,
+            @RequestParam(required = false) String instructorName) {
 
         ModelAndView response = new ModelAndView();
         response.setViewName("index");
         response.addObject("name", "Michaela");
-        List<Course> coursesByName = courseDAO.findByNameContaining(searchName);
-        List<Course> coursesByInstructor = courseDAO.findByInstructorContaining(searchInstructor);
-        response.addObject("coursesByName", coursesByName);
-        response.addObject("coursesByInstructor", coursesByInstructor);
-        response.addObject("searchName", searchName);
-        response.addObject("searchInstructor", searchInstructor);
+        response.addObject("courseName", courseName);
+        response.addObject("instructorName", instructorName);
+
+        // if (courseName != null && !courseName.equals("")) {
+        // List<Course> coursesByName = courseDAO.findByNameContaining(courseName);
+        List<Course> courses = courseDAO.findByNameOrInstructor(courseName, instructorName);
+        // response.addObject("coursesByName", coursesByName);
+        response.addObject("courses", courses);
+        // }
         return response;
     }
 
