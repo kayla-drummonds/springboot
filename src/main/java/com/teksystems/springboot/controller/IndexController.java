@@ -12,6 +12,9 @@ import org.springframework.web.servlet.ModelAndView;
 import com.teksystems.springboot.database.dao.CourseDAO;
 import com.teksystems.springboot.database.entity.Course;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping
 public class IndexController {
@@ -42,5 +45,14 @@ public class IndexController {
     public ModelAndView search() {
         System.out.println("Index controller search request");
         return null;
+    }
+
+    @GetMapping("/course")
+    public ModelAndView course() {
+        log.debug("Index controller course request method");
+        ModelAndView response = new ModelAndView();
+        response.setViewName("course");
+
+        return response;
     }
 }
