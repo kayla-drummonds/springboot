@@ -10,10 +10,12 @@ import com.teksystems.springboot.database.entity.Course;
 
 @Repository
 public interface CourseDAO extends JpaRepository<Course, Integer> {
-    
+
     @Query("select c from Course c where c.name = :name")
     public List<Course> findByCourseName(String name);
-    
+
     public List<Course> findByNameContaining(String name);
+
+    public List<Course> findByInstructorContaining(String instructor);
 
 }
