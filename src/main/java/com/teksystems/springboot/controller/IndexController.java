@@ -63,9 +63,11 @@ public class IndexController {
         return response;
     }
 
-    @GetMapping("/course/{id}")
-    public ModelAndView pathVar(@PathVariable String id) {
+    @GetMapping("/course/path/{id}")
+    public ModelAndView pathVar(@PathVariable Integer id) {
         log.info("Incoming path variable = " + id);
+        Course c = courseDAO.findCourseById(id);
+        log.info("This is my course name: " + c.getName());
         return null;
     }
 
