@@ -1,5 +1,6 @@
 package com.teksystems.springboot.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,47 @@ public class IndexController {
 
     @GetMapping("/course")
     public ModelAndView course() {
-        log.debug("Index controller course request method");
+        log.info("Index controller course request method");
         ModelAndView response = new ModelAndView();
         response.setViewName("course");
+
+        return response;
+    }
+
+    @GetMapping("/courseSubmit")
+    public ModelAndView courseSubmit(@RequestParam(required = false) String courseName,
+            @RequestParam(required = false) String instructorName) {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("course");
+
+        log.debug("Index controller course submit method");
+        log.info("Course submit: courseName: " + courseName);
+        log.info("Course submit: instructorName: " + instructorName);
+
+        List<String> errorMessages = new ArrayList<>();
+
+        if (courseName == null || courseName.equals("")) {
+            errorMessages.add("The course name cannot be empty");
+        }
+
+        if (instructorName == null || instructorName.equals("")) {
+            errorMessages.add("The instructor name cannot be empty");
+        }
+
+        if (!errorMessages.isEmpty()) {
+            for (String error : errorMessages) {
+                log.info(error);
+            }
+            response.addObject("errors", errorMessages);
+            response.addObject("courseName", courseName);
+            response.addObject("instructorName", instructorName);
+        } else {
+            Course course = new Course();
+            course.setName(courseName);
+            course.setInstructor(instructorName);
+
+            courseDAO.save(course);
+        }
 
         return response;
     }

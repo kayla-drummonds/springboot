@@ -8,12 +8,19 @@
 	</head>
 	<body>
 		<h1>Create a new course</h1>
-		<form>
+		<c:if test="${not empty errorMessages}">
+			<c:forEach items="${errorMessages}" var="error">
+				<p style="color: red">${error}</p>
+			</c:forEach>
+		</c:if>
+		<form action="/courseSubmit">
 			<label for="courseName">Course Name:</label>
-			<input type="text" name="courseName" />
+			<input type="text" name="courseName" value="${courseName}" />
+			<br />
 			<br />
 			<label for="instructorName">Instructor Name:</label>
-			<input type="text" name="instructorName" />
+			<input type="text" name="instructorName" value="${instructorName}" />
+			<br />
 			<br />
 			<button type="submit">Submit</button>
 		</form>

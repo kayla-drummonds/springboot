@@ -31,13 +31,19 @@ public class Student {
     private Integer id;
 
     @Column
-    private String email;
+    private String firstName;
 
     @Column
-    private String name;
+    private String lastName;
 
     @Column
-    private String password;
+    private String city;
+
+    @Column
+    private String state;
+
+    @Column
+    private Integer zip;
 
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<StudentCourse> studentCourses;
