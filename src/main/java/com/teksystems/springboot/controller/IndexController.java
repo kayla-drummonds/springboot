@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teksystems.springboot.database.dao.CourseDAO;
+import com.teksystems.springboot.database.dao.StudentDAO;
 import com.teksystems.springboot.database.entity.Course;
+import com.teksystems.springboot.database.entity.Student;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -22,6 +24,9 @@ public class IndexController {
 
     @Autowired
     private CourseDAO courseDAO;
+
+    @Autowired
+    private StudentDAO studentDAO;
 
     @GetMapping({ "/", "/index", "/index.html" })
     public ModelAndView slash(@RequestParam(required = false) String courseName,
@@ -90,6 +95,74 @@ public class IndexController {
             course.setInstructor(instructorName);
 
             courseDAO.save(course);
+        }
+
+        return response;
+    }
+
+    @GetMapping("/student")
+    public ModelAndView student() {
+        log.info("Index controller student request method");
+        ModelAndView response = new ModelAndView();
+        response.setViewName("student");
+
+        return response;
+    }
+
+    @GetMapping("/studentSubmit")
+    public ModelAndView studentSubmit(@RequestParam(required = false) String firstName,
+            @RequestParam(required = false) String lastName, @RequestParam(required = false) String city,
+            @RequestParam(required = false) String state, @RequestParam(required = false) Integer zip) {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("student");
+
+        log.debug("Index controller student submit method");
+
+        List<String> errorMessages = new ArrayList<>();
+        List<String> successMessages = new ArrayList<>();
+
+        if (firstName.isEmpty()) {
+            errorMessages.add("The first name field cannot be empty");
+        }
+
+        if (lastName.isEmpty()) {
+            errorMessages.add("The last name field cannot be empty");
+        }
+
+        if (city.isEmpty()) {
+            errorMessages.add("The city field cannot be empty");
+        }
+
+        if (state.isEmpty()) {
+            errorMessages.add("The state field cannot be empty");
+        }
+
+        if (zip == null) {
+            errorMessages.add("The zip code field cannot be empty");
+        }
+
+        if (!errorMessages.isEmpty()) {
+            for (String error : errorMessages) {
+                log.info(error);
+            }
+            response.addObject("errors", errorMessages);
+            response.addObject("firstName", firstName);
+            response.addObject("lastName", lastName);
+            response.addObject("city", city);
+            response.addObject("state", state);
+            response.addObject("zip", zip);
+        } else {
+            Student student = new Student();
+            student.setFirstName(firstName);
+            student.setLastName(lastName);
+            student.setCity(city);
+            student.setState(state);
+            student.setZip(zip);
+
+            studentDAO.save(student);
+
+            successMessages.add("Student successfully saved.");
+            response.addObject("successMessage", successMessages);
         }
 
         return response;
