@@ -30,10 +30,10 @@ public class Student {
     @Column(name = "id")
     private Integer id;
 
-    @Column
+    @Column(name = "firstName")
     private String firstName;
 
-    @Column
+    @Column(name = "lastName")
     private String lastName;
 
     @Column
