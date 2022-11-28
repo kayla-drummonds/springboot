@@ -1,15 +1,15 @@
 package com.teksystems.springboot.database.entity;
 
-import java.util.List;
+// import java.util.List;
 
-import javax.persistence.CascadeType;
+// import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
+// import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+// import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -44,9 +44,13 @@ public class Course {
     @Column
     private String instructor;
 
-    @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @EqualsAndHashCode.Exclude
-    @ToString.Exclude
-    private List<StudentCourse> studentCourses;
-
+    /*
+     * @OneToMany(mappedBy = "course", fetch = FetchType.LAZY, cascade =
+     * CascadeType.ALL)
+     * 
+     * @EqualsAndHashCode.Exclude
+     * 
+     * @ToString.Exclude
+     * private List<StudentCourse> studentCourses;
+     */
 }

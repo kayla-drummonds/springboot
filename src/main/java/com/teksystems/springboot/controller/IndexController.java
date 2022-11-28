@@ -84,6 +84,18 @@ public class IndexController {
         return c;
     }
 
+    @ResponseBody
+    @GetMapping("/courses/all")
+    public List<Course> allCourses() {
+        log.error("This is an error");
+        log.warn("This is a warning");
+        log.info("This is info");
+        log.debug("This is debug");
+
+        List<Course> courses = courseDAO.findAll();
+        return courses;
+    }
+
     @GetMapping("/courseSubmit")
     public ModelAndView courseSubmit(@RequestParam(required = false) String courseName,
             @RequestParam(required = false) String instructorName) {
