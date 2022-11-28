@@ -8,6 +8,7 @@
 	</head>
 
 	<body>
+		<jsp:include page="include/header.jsp" />
 		<h1>Hello, ${name}</h1>
 		<h2 style="text-align: center">Course Catalog</h2>
 		<form method="get" action="/">
@@ -43,5 +44,6 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<jsp:include page="include/footer.jsp" />
 	</body>
 </html>
