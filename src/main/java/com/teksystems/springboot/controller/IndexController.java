@@ -2,6 +2,10 @@ package com.teksystems.springboot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teksystems.springboot.database.dao.CourseDAO;
@@ -63,12 +68,20 @@ public class IndexController {
         return response;
     }
 
+    @ResponseBody
     @GetMapping("/course/path/{id}")
-    public ModelAndView pathVar(@PathVariable Integer id) {
+    public Course pathVar(@PathVariable Integer id, HttpSession session) {
         log.info("Incoming path variable = " + id);
         Course c = courseDAO.findCourseById(id);
         log.info("This is my course name: " + c.getName());
-        return null;
+
+        if (session.getAttribute("key") == null) {
+            log.info("Key not found in session");
+            session.setAttribute("key", "value");
+        } else {
+            log.info("Key is in the session");
+        }
+        return c;
     }
 
     @GetMapping("/courseSubmit")
@@ -129,6 +142,9 @@ public class IndexController {
 
         List<String> errorMessages = new ArrayList<>();
         List<String> successMessages = new ArrayList<>();
+        Pattern zipPattern = Pattern.compile(zip.toString());
+        Matcher m = zipPattern.matcher("[0-9]{5}");
+        boolean zipMatch = m.matches();
 
         if (firstName.isEmpty()) {
             errorMessages.add("The first name field cannot be empty");
@@ -146,8 +162,8 @@ public class IndexController {
             errorMessages.add("The state field cannot be empty");
         }
 
-        if (zip == null) {
-            errorMessages.add("The zip code field cannot be empty");
+        if (!zipMatch) {
+            errorMessages.add("The zip code input is not valid");
         }
 
         if (!errorMessages.isEmpty()) {
@@ -171,7 +187,7 @@ public class IndexController {
             studentDAO.save(student);
 
             successMessages.add("Student successfully saved.");
-            response.addObject("successMessage", successMessages);
+            response.addObject("successMessages", successMessages);
         }
 
         return response;
