@@ -2,6 +2,7 @@ package com.teksystems.springboot.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -11,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -96,7 +98,7 @@ public class IndexController {
         return courses;
     }
 
-    @GetMapping("/courseSubmit")
+    @PostMapping("/courseSubmit")
     public ModelAndView courseSubmit(@RequestParam(required = false) String courseName,
             @RequestParam(required = false) String instructorName) {
         ModelAndView response = new ModelAndView();
@@ -202,6 +204,19 @@ public class IndexController {
             response.addObject("successMessages", successMessages);
         }
 
+        return response;
+    }
+
+    @GetMapping("/course/instructor")
+    public ModelAndView instCount() {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("instructor_count");
+
+        List<Map<String, Object>> instructorCounts = courseDAO.instructorCourseCount();
+        for (Map<String, Object> count : instructorCounts) {
+            log.debug(count.get("instructor") + " is teaching " + count.get("cnt") + "course(s)");
+        }
+        response.addObject("instructorCounts", instructorCounts);
         return response;
     }
 }

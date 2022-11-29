@@ -13,7 +13,7 @@
 				<p style="color: red">${error}</p>
 			</c:forEach>
 		</c:if>
-		<form action="/courseSubmit">
+		<form action="/courseSubmit" method="post">
 			<label for="courseName">Course Name:</label>
 			<input type="text" name="courseName" value="${courseName}" />
 			<br />
