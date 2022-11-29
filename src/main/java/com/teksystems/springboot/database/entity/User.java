@@ -54,7 +54,7 @@ public class User {
     private String state;
 
     @Column
-    private Integer zip;
+    private String zip;
 
     @Column
     private String phone;
