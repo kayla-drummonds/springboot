@@ -1,6 +1,7 @@
 package com.teksystems.springboot.form;
 
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
@@ -16,7 +17,13 @@ public class CreateUserForm {
     @Length(max = 256, message = "Email must be less than 256 characters.")
     private String email;
 
+    @NotEmpty(message = "Password is required.")
+    @Pattern(regexp = "^[a-zA-Z0-9!@#]+$", message = "Password can only contain lowercase, uppercase, and special characters")
+    @Length(min = 8, message = "Password must be at least 8 characters.")
+    @Length(max = 25, message = "Password must be shorter than 25 characters.")
     private String password;
+
+    @NotEmpty(message = "Confirm password is required.")
     private String confirmPassword;
 
     @NotEmpty(message = "First name is required.")
