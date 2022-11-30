@@ -3,7 +3,7 @@
 
 <div class="container mt-3">
 	<h1 class="text-center">Create User</h1>
-	<form action="/users/createuser">
+	<form action="/user/createuser" method="post">
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
 			<input
@@ -37,7 +37,11 @@
 		<div class="row">
 			<div class="col-6 mb-3">
 				<label for="firstName" class="form-label">First Name</label>
-				<input type="text" class="form-control" id="firstName" />
+				<input
+					type="text"
+					class="form-control"
+					id="firstName"
+					name="firstName" />
 				<div id="firstNameHelp" class="form-text">
 					Please give us your first name.
 				</div>
@@ -52,7 +56,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="address" class="form-label">Address</label>
-			<input type="text" class="form-control" id="address" />
+			<input type="text" class="form-control" id="address" name="address" />
 			<div id="addressHelp" class="form-text">Please give us your address.</div>
 		</div>
 		<div class="row">
@@ -63,7 +67,7 @@
 			</div>
 			<div class="col-4 mb-3">
 				<label for="state" class="form-label">State</label>
-				<input type="text" class="form-control" id="state" />
+				<input type="text" class="form-control" id="state" name="state" />
 				<div id="stateHelp" class="form-text">Please give us your state.</div>
 			</div>
 			<div class="col-4 mb-3">
@@ -74,7 +78,7 @@
 		</div>
 		<div class="mb-3">
 			<label for="phone" class="form-label">Phone</label>
-			<input type="text" class="form-control" id="phone" />
+			<input type="text" class="form-control" id="phone" name="phone" />
 			<div id="phoneHelp" class="form-text">
 				Please give us your phone number.
 			</div>
