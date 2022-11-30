@@ -3,6 +3,11 @@
 
 <div class="container mt-3">
 	<h1 class="text-center">Create User</h1>
+	<c:if test="${not empty bindingResult.getAllErrors()}">
+		<c:forEach items="${bindingResult.getAllErrors()}" var="error">
+			<p style="color: red">${error.getDefaultMessage()}</p>
+		</c:forEach>
+	</c:if>
 	<form action="/user/createuser" method="post">
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>

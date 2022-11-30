@@ -13,16 +13,39 @@ import lombok.ToString;
 @ToString
 public class CreateUserForm {
     @NotEmpty(message = "Email is required.")
-    @Length(max = 200, message = "Email must be less than 200 characters.")
+    @Length(max = 256, message = "Email must be less than 256 characters.")
     private String email;
 
     private String password;
     private String confirmPassword;
+
+    @NotEmpty(message = "First name is required.")
+    @Length(max = 45, message = "First name must be less than 45 characters.")
     private String firstName;
+
+    @NotEmpty(message = "Last name is required.")
+    @Length(max = 45, message = "Last name must be less than 45 characters.")
     private String lastName;
+
+    @NotEmpty(message = "Address is required.")
+    @Length(max = 45, message = "Address must be less than 45 characters.")
     private String address;
+
+    @NotEmpty(message = "City is required.")
+    @Length(max = 45, message = "City must be less than 45 characters.")
     private String city;
+
+    @NotEmpty(message = "State is required.")
+    @Length(max = 45, message = "State must be less than 45 characters.")
     private String state;
+
+    @NotEmpty(message = "Zip code is required.")
+    @Length(max = 5, message = "Zip code must be no more than 5 characters.")
+    @Length(min = 5, message = "Zip code must be not be less than 5 characters")
     private String zip;
+
+    @NotEmpty(message = "Phone number is required.")
+    @Length(max = 10, message = "Phone number must be no more than 10 characters.")
+    @Length(min = 10, message = "Phone number must not be less than 10 characters")
     private String phone;
 }
