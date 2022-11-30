@@ -5,6 +5,8 @@ import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Length;
 
+import com.teksystems.springboot.validation.EmailUnique;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -15,6 +17,7 @@ import lombok.ToString;
 public class CreateUserForm {
     @NotEmpty(message = "Email is required.")
     @Length(max = 256, message = "Email must be less than 256 characters.")
+    @EmailUnique
     private String email;
 
     @NotEmpty(message = "Password is required.")
