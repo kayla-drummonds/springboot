@@ -1,3 +1,4 @@
+<%@taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
@@ -11,4 +12,20 @@
 			crossorigin="anonymous" />
 		<title>Document</title>
 	</head><body>
+		<div class="row">
+			<div class="col-10">
+				<a href="/">Home</a>
+				<a href="/user/createuser">Create User</a>
+				<sec:authorize access="hasAnyAuthority('ADMIN')">
+					<a href="/admin/admintest">Admin Test</a>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
+					<a href="/user/logout">Logout</a>
+					<sec:authentication property="principal.username" />
+				</sec:authorize>
+				<sec:authorize access="!isAuthenticated()">
+					<a href="/user/login">Login</a>
+				</sec:authorize>
+			</div>
+		</div>
 	</html>

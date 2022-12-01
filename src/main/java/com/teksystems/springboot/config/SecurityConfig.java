@@ -26,19 +26,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(
                         "/pub/**",
-                        "/user/**")
+                        "/user/**", "/", "/index")
                 .permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/login/login")
-                .defaultSuccessUrl("/login/login")
+                .loginPage("/user/login")
+                .loginProcessingUrl("/user/loginpost")
                 .permitAll()
                 .and()
                 .logout()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
-                .logoutSuccessUrl("/login?/logout")
+                .logoutUrl("/user/logout")
+                .logoutSuccessUrl("/index")
                 .permitAll();
     }
 }
