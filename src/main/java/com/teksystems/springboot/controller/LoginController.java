@@ -25,6 +25,14 @@ public class LoginController {
     @Autowired
     private UserDAO userDAO;
 
+    @GetMapping("/user/login")
+    public ModelAndView login() {
+        ModelAndView response = new ModelAndView();
+
+        response.setViewName("login_pages/login");
+        return response;
+    }
+
     @GetMapping("/user/createuser")
     public ModelAndView createUser(CreateUserForm form) {
         ModelAndView response = new ModelAndView();
