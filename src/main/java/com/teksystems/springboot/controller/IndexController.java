@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.teksystems.springboot.config.AuthenticatedUserService;
 import com.teksystems.springboot.database.dao.CourseDAO;
 import com.teksystems.springboot.database.dao.StudentDAO;
 import com.teksystems.springboot.database.entity.Course;
@@ -35,6 +36,9 @@ public class IndexController {
 
     @Autowired
     private StudentDAO studentDAO;
+
+    @Autowired
+    private AuthenticatedUserService authService;
 
     @GetMapping({ "/", "/index", "/index.html" })
     public ModelAndView slash(@RequestParam(required = false) String courseName,
