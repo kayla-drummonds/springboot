@@ -123,6 +123,18 @@
 				Please give us your phone number.
 			</div>
 		</div>
+		<div class="mb-3">
+			<label for="avatar" class="form-label">Avatar</label>
+			<input
+				type="text"
+				class="form-control"
+				id="avatar"
+				name="avatar"
+				value="${form.avatar}" />
+			<div id="avatarHelp" class="form-text">
+				Please enter the full url for your avatar image.
+			</div>
+		</div>
 		<button type="submit" class="btn btn-primary">Submit</button>
 	</form>
 </div>

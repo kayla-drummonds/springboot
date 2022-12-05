@@ -78,6 +78,7 @@ public class LoginController {
             user.setZip(form.getZip());
             user.setPhone(form.getPhone());
             user.setCreateDate(new Date());
+            user.setAvatar(form.getAvatar());
 
             userDAO.save(user);
 

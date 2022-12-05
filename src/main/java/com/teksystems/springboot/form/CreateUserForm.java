@@ -58,4 +58,6 @@ public class CreateUserForm {
     @Length(max = 10, message = "Phone number must be no more than 10 characters.")
     @Length(min = 10, message = "Phone number must not be less than 10 characters")
     private String phone;
+
+    private String avatar;
 }
