@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teksystems.springboot.config.AuthenticatedUserService;
@@ -228,6 +229,17 @@ public class IndexController {
     public ModelAndView fileUpload() {
         ModelAndView response = new ModelAndView();
         response.setViewName("fileupload");
+
+        return response;
+    }
+
+    @PostMapping("/fileuploadsubmit")
+    public ModelAndView fileUploadSubmit(@RequestParam MultipartFile file) {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("fileupload");
+
+        log.debug("File name = " + file.getOriginalFilename());
+        log.debug("File size = " + file.getSize() + " bytes");
 
         return response;
     }

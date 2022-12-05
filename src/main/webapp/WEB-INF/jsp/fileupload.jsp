@@ -3,10 +3,7 @@
 
 <div class="container">
 	<h1>File upload example</h1>
-	<form
-		method="POST"
-		action="/spring-mvc-xml/uploadFile"
-		enctype="multipart/form-data">
+	<form method="POST" action="/fileuploadsubmit" enctype="multipart/form-data">
 		<div class="row col-4 mb-2">Select a file to upload</div>
 		<div class="row col-6 mb-3">
 			<input type="file" name="file" />
