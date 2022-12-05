@@ -1,5 +1,7 @@
 package com.teksystems.springboot.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +10,7 @@ import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -234,13 +237,16 @@ public class IndexController {
     }
 
     @PostMapping("/fileuploadsubmit")
-    public ModelAndView fileUploadSubmit(@RequestParam MultipartFile file) {
+    public ModelAndView fileUploadSubmit(@RequestParam MultipartFile file) throws IOException {
         ModelAndView response = new ModelAndView();
         response.setViewName("fileupload");
 
         log.debug("File name = " + file.getOriginalFilename());
         log.debug("File size = " + file.getSize() + " bytes");
 
+        File targetFile = new File("./src/main/webapp/WEB-INF/jsp/pub/images/" + file.getOriginalFilename());
+
+        FileUtils.copyInputStreamToFile(file.getInputStream(), targetFile);
         return response;
     }
 }
