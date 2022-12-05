@@ -23,7 +23,7 @@ import lombok.ToString;
 public class Tutorial {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     @Column(name = "title")
     private String title;
