@@ -244,10 +244,12 @@ public class IndexController {
         log.debug("File name = " + file.getOriginalFilename());
         log.debug("File size = " + file.getSize() + " bytes");
 
-        File targetFile = new File("./src/main/webapp/WEB-INF/pub/images/" + file.getOriginalFilename());
+        File targetFile = new File("./src/main/webapp/pub/images/" + file.getOriginalFilename());
 
         FileUtils.copyInputStreamToFile(file.getInputStream(), targetFile);
-        response.addObject("filename", "/pub/images/" + file.getOriginalFilename());
+
+        String url = "/pub/images/" + file.getOriginalFilename();
+        response.addObject("filename", url);
         return response;
     }
 }
