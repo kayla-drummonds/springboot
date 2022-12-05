@@ -12,5 +12,6 @@
 			<input class="btn btn-primary" type="submit" value="Submit" />
 		</div>
 	</form>
+	<img src="${filename}" alt="uploaded image" />
 </div>
 <jsp:include page="./include/footer.jsp" />
