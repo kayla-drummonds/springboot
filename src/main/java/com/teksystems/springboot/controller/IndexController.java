@@ -223,4 +223,12 @@ public class IndexController {
         response.addObject("instructorCounts", instructorCounts);
         return response;
     }
+
+    @GetMapping("/fileupload")
+    public ModelAndView fileUpload() {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("fileupload");
+
+        return response;
+    }
 }
