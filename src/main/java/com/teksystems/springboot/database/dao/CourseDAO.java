@@ -27,4 +27,6 @@ public interface CourseDAO extends JpaRepository<Course, Integer> {
             + "where instructor is not null and instructor!= \"\" " + "group by instructor "
             + "order by instructor", nativeQuery = true)
     public List<Map<String, Object>> instructorCourseCount();
+
+    public Course findByName(String name);
 }

@@ -260,4 +260,23 @@ public class IndexController {
 
         return response;
     }
+
+    /*
+     * @ResponseBody
+     * 
+     * @GetMapping("/ajaxcall")
+     * public String ajaxCall(@RequestParam String clickedValue) {
+     * log.debug("in the ajax call method: " + clickedValue);
+     * return "success from server: " + clickedValue;
+     * }
+     */
+
+    @ResponseBody
+    @GetMapping("/ajaxcall")
+    public Course ajaxCall(@RequestParam String clickedValue) {
+        log.debug("in the ajax call method: " + clickedValue);
+        Course c = courseDAO.findByName(clickedValue);
+        log.debug("course found: " + c.getId() + " | " + c.getName());
+        return c;
+    }
 }
