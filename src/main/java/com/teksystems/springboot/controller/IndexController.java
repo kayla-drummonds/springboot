@@ -252,4 +252,12 @@ public class IndexController {
         response.addObject("filename", url);
         return response;
     }
+
+    @GetMapping("/ajax")
+    public ModelAndView ajax() {
+        ModelAndView response = new ModelAndView();
+        response.setViewName("ajax");
+
+        return response;
+    }
 }
