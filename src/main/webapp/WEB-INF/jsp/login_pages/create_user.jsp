@@ -9,7 +9,7 @@
 		</c:forEach>
 	</c:if>
 	<form action="/user/createuser" method="post">
-		<input type="hidden" name="id" value="10" />
+		<input type="hidden" name="id" value="${form.id}" />
 		<div class="mb-3">
 			<label for="email" class="form-label">Email address</label>
 			<input

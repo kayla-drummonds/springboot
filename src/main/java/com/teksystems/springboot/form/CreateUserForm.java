@@ -15,6 +15,9 @@ import lombok.ToString;
 @Setter
 @ToString
 public class CreateUserForm {
+
+    private Integer id;
+
     @NotEmpty(message = "Email is required.")
     @Length(max = 256, message = "Email must be less than 256 characters.")
     @EmailUnique

@@ -54,12 +54,13 @@ public class IndexController {
         response.addObject("courseName", courseName);
         response.addObject("instructorName", instructorName);
 
-        // if (courseName != null && !courseName.equals("")) {
-        // List<Course> coursesByName = courseDAO.findByNameContaining(courseName);
-        List<Course> courses = courseDAO.findByNameOrInstructor(courseName, instructorName);
-        // response.addObject("coursesByName", coursesByName);
-        response.addObject("courses", courses);
-        // }
+        if (courseName != null && !courseName.equals("")) {
+            List<Course> courses = courseDAO.findByNameOrInstructor(courseName, instructorName);
+            response.addObject("courses", courses);
+        } else {
+            List<Course> courses = courseDAO.findAll();
+            response.addObject("courses", courses);
+        }
         return response;
     }
 

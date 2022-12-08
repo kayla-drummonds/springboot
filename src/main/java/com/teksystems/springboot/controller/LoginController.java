@@ -12,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.teksystems.springboot.database.dao.UserDAO;
@@ -64,7 +65,11 @@ public class LoginController {
         }
 
         if (!bindingResult.hasErrors()) {
-            User user = new User();
+
+            User user = userDAO.findUserById(form.getId());
+            if (user == null) {
+                user = new User();
+            }
 
             String encodedPassword = passwordEncoder.encode(form.getPassword());
 
@@ -92,6 +97,32 @@ public class LoginController {
         }
 
         log.debug(form.toString());
+        return response;
+    }
+
+    @GetMapping("/user/edituser")
+    public ModelAndView editUser(@RequestParam Integer id) {
+        ModelAndView response = new ModelAndView();
+
+        response.setViewName("login_pages/create_user");
+
+        User user = userDAO.findUserById(id);
+
+        CreateUserForm form = new CreateUserForm();
+
+        form.setId(user.getId());
+        form.setFirstName(user.getFirstName());
+        form.setLastName(user.getLastName());
+        form.setEmail(user.getEmail());
+        form.setAddress(user.getAddress());
+        form.setCity(user.getCity());
+        form.setState(user.getState());
+        form.setZip(user.getZip());
+        form.setPhone(user.getPhone());
+        form.setAvatar(user.getAvatar());
+
+        response.addObject("form", form);
+
         return response;
     }
 }

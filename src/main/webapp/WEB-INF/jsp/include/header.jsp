@@ -24,6 +24,9 @@
 					<a href="/ajax">AJAX</a>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
+					<a href="/course/create">Create Course</a>
+				</sec:authorize>
+				<sec:authorize access="isAuthenticated()">
 					<a href="/user/logout">Logout</a>
 					<sec:authentication property="principal.username" />
 				</sec:authorize>
